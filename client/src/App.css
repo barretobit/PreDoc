@@ -1,16 +1,5 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  /* text-align: center; */
 }
 
 .App-header {
@@ -28,11 +17,92 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+:root {
+  --bg-color: #121212; /* Dark background */
+  --text-color: #e8eaed; /* Light text */
+  --input-bg: #303134; /* Dark input background */
+  --input-text: #e8eaed; /* Light input text */
+  --input-border: #5f6368; /* Dark input border */
+  --primary-color: #1a73e8; /* Blue primary color */
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+form {
+  width: 100%;
+  max-width: 600px;
+}
+
+div {
+  display: flex; /* Use flexbox for checkbox alignment */
+  align-items: center; /* Vertically align items */
+  margin-bottom: 15px; /* Add space between rows */
+}
+
+label {
+  display: inline-block; /* Allow inline alignment */
+  margin-right: 10px; /* Add space between label and checkbox */
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="range"],
+select,
+textarea {
+  width: calc(100%);
+  height: max-content;
+  padding: 10px;
+  /* margin-bottom: 15px; */
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  box-sizing: border-box;
+}
+
+input[type="range"] {
+  width: calc(100% - 80px); 
+  display: inline-block;
+  padding: 0px;
+  border: 0px;
+}
+
+input[type="checkbox"] {
+  margin: 0;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.appTitle {
+  font-size: xx-large;
+  padding-bottom: 10%;
+  text-align: center;
+}
+
+.submitBtn {
+  margin-top: 10%;
+  font-size: large;
+}
+
+.resultDiv {
+  display: block;
 }
