@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { InferenceClient } from "@huggingface/inference";
+import { BeatLoader } from "react-spinners";
+import executeAiModelRequest from "./ApiService";
 
 function LandingPage() {
+  let [loading, setLoading] = useState(false);
+
   const [age, setAge] = useState("");
   const [sex, setSex] = useState("male");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
-  const [foodScore, setFoodScore] = useState(3); // Default to 3
-  const [drinkScore, setDrinkScore] = useState(3); // Default to 3
-  const [waterIntake, setWaterIntake] = useState(1600); // Default to 1600ml
+  const [foodScore, setFoodScore] = useState(3);
+  const [drinkScore, setDrinkScore] = useState(3);
+  const [waterIntake, setWaterIntake] = useState(1600);
   const [coffee, setCoffee] = useState(false);
   const [alcohol, setAlcohol] = useState(false);
   const [drugs, setDrugs] = useState(false);
@@ -19,49 +22,29 @@ function LandingPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const apiToken = process.env.REACT_APP_API_KEY;
-    const client = new InferenceClient(apiToken);
-
-    const context = `
-            Age: ${age}
-            Sex: ${sex}
-            Height: ${height} cm
-            Weight: ${weight} kg
-            Food Intake Score (0-5): ${foodScore}
-            Drink Intake Score (0-5): ${drinkScore}
-            Water Intake: ${waterIntake} ml
-            Coffee Consumption: ${coffee ? "Yes" : "No"}
-            Alcohol Consumption: ${alcohol ? "Yes" : "No"}
-            Drug Consumption: ${drugs ? "Yes" : "No"}
-            Smoking: ${smoking ? "Yes" : "No"}
-        `;
-
-    const prompt = `
-        User Information:
-        ${context}
-
-        Symptoms: ${symptoms}
-
-        Based on this information, please provide a brief summary of potential related medical conditions. Remember, this is for informational purposes only and should not be used for medical advice.
-    `;
-
+    setLoading = true;
     try {
-      const chatCompletion = await client.chatCompletion({
-        provider: "hf-inference",
-        model: "mistralai/Mistral-Nemo-Instruct-2407",
-        messages: [
-          {
-            role: "user",
-            content: prompt,
-          },
-        ],
-        max_tokens: 500,
-      });
+      // const chatCompletion = await executeAiModelRequest(
+      //   symptoms,
+      //   age,
+      //   sex,
+      //   height,
+      //   weight,
+      //   foodScore,
+      //   drinkScore,
+      //   waterIntake,
+      //   coffee,
+      //   alcohol,
+      //   drugs,
+      //   smoking
+      // );
+
+      const chatCompletion = "This is the result";
 
       setResult(chatCompletion);
+      setLoading = false;
     } catch (error) {
-      console.error("Error fetching from Hugging Face API:", error);
+      console.error("Error in handleSubmit:", error);
       setResult({ error: error.message });
     }
   };
@@ -79,7 +62,7 @@ function LandingPage() {
     return (
       <div class="resultDiv">
         {paragraphs.map((paragraph, index) => {
-          const cleanParagraph = paragraph.replace(/\*\*/g, ""); 
+          const cleanParagraph = paragraph.replace(/\*\*/g, "");
           return <p key={index}>{cleanParagraph}</p>;
         })}
       </div>
@@ -89,37 +72,44 @@ function LandingPage() {
   return (
     <form onSubmit={handleSubmit}>
       <h1 class="appTitle">PreDoc</h1>
-      <div>
-        <label>Age:</label>
-        <input
-          type="number"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-        />
+
+      <div className="form-row">
+        <div>
+          <label>Age:</label>
+          <input
+            type="number"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Sex:</label>
+          <select value={sex} onChange={(e) => setSex(e.target.value)}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
       </div>
-      <div>
-        <label>Sex:</label>
-        <select value={sex} onChange={(e) => setSex(e.target.value)}>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
+
+      <div className="form-row">
+        <div>
+          <label>Height (cm):</label>
+          <input
+            type="number"
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Weight (kg):</label>
+          <input
+            type="number"
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+          />
+        </div>
       </div>
-      <div>
-        <label>Height (cm):</label>
-        <input
-          type="number"
-          value={height}
-          onChange={(e) => setHeight(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Weight (kg):</label>
-        <input
-          type="number"
-          value={weight}
-          onChange={(e) => setWeight(e.target.value)}
-        />
-      </div>
+
       <div>
         <label>Food Intake Score (0-5):</label>
         <input
@@ -131,6 +121,7 @@ function LandingPage() {
         />
         <span>{foodScore}</span>
       </div>
+
       <div>
         <label>Drink Intake Score (0-5):</label>
         <input
@@ -142,6 +133,7 @@ function LandingPage() {
         />
         <span>{drinkScore}</span>
       </div>
+
       <div>
         <label>Daily Water Intake (ml):</label>
         <input
@@ -152,40 +144,47 @@ function LandingPage() {
           value={waterIntake}
           onChange={(e) => setWaterIntake(parseInt(e.target.value))}
         />
-        <span>{waterIntake} ml</span>
+        <span>{waterIntake}&nbsp;ml</span>
       </div>
-      <div>
-        <label>Coffee:</label>
-        <input
-          type="checkbox"
-          checked={coffee}
-          onChange={(e) => setCoffee(e.target.checked)}
-        />
+
+      <div className="form-row">
+        <div>
+          <label>Coffee:</label>
+          <input
+            type="checkbox"
+            checked={coffee}
+            onChange={(e) => setCoffee(e.target.checked)}
+          />
+        </div>
+
+        <div>
+          <label>Alcohol:</label>
+          <input
+            type="checkbox"
+            checked={alcohol}
+            onChange={(e) => setAlcohol(e.target.checked)}
+          />
+        </div>
+
+        <div>
+          <label>Drugs:</label>
+          <input
+            type="checkbox"
+            checked={drugs}
+            onChange={(e) => setDrugs(e.target.checked)}
+          />
+        </div>
+
+        <div>
+          <label>Smoking:</label>
+          <input
+            type="checkbox"
+            checked={smoking}
+            onChange={(e) => setSmoking(e.target.checked)}
+          />
+        </div>
       </div>
-      <div>
-        <label>Alcohol:</label>
-        <input
-          type="checkbox"
-          checked={alcohol}
-          onChange={(e) => setAlcohol(e.target.checked)}
-        />
-      </div>
-      <div>
-        <label>Drugs:</label>
-        <input
-          type="checkbox"
-          checked={drugs}
-          onChange={(e) => setDrugs(e.target.checked)}
-        />
-      </div>
-      <div>
-        <label>Smoking:</label>
-        <input
-          type="checkbox"
-          checked={smoking}
-          onChange={(e) => setSmoking(e.target.checked)}
-        />
-      </div>
+
       <div>
         <label>Symptoms (max 350 characters):</label>
       </div>
@@ -210,6 +209,8 @@ function LandingPage() {
           </p>
         </div>
       )}
+
+      <BeatLoader color="#ffffff" loading={loading} size={12} />
     </form>
   );
 }
