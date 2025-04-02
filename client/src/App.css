@@ -1,7 +1,3 @@
-.App {
-  /* text-align: center; */
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -18,12 +14,12 @@
 }
 
 :root {
-  --bg-color: #121212; /* Dark background */
-  --text-color: #e8eaed; /* Light text */
-  --input-bg: #303134; /* Dark input background */
-  --input-text: #e8eaed; /* Light input text */
-  --input-border: #5f6368; /* Dark input border */
-  --primary-color: #1a73e8; /* Blue primary color */
+  --bg-color: #121212;
+  --text-color: #e8eaed;
+  --input-bg: #303134;
+  --input-text: #e8eaed;
+  --input-border: #5f6368;
+  --primary-color: #1a73e8;
 }
 
 body {
@@ -44,14 +40,14 @@ form {
 }
 
 div {
-  display: flex; /* Use flexbox for checkbox alignment */
-  align-items: center; /* Vertically align items */
-  margin-bottom: 15px; /* Add space between rows */
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 label {
-  display: inline-block; /* Allow inline alignment */
-  margin-right: 10px; /* Add space between label and checkbox */
+  display: inline-block;
+  margin-right: 10px;
   font-weight: 600;
 }
 
@@ -63,7 +59,6 @@ textarea {
   width: calc(100%);
   height: max-content;
   padding: 10px;
-  /* margin-bottom: 15px; */
   border: 1px solid var(--input-border);
   border-radius: 4px;
   background-color: var(--input-bg);
@@ -93,14 +88,25 @@ button {
 }
 
 .appTitle {
-  font-size: xx-large;
-  padding-bottom: 10%;
+  margin-top: 0px;
+  padding-bottom: 0px;
   text-align: center;
+  font-family: "Birthstone", cursive;
+  font-weight: 400;
+  font-size: 100px;
+  font-style: normal;
 }
 
 .submitBtn {
-  margin-top: 10%;
+  margin-top: 20px;
   font-size: large;
+  max-width: 140px;
+}
+
+.submitDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .resultDiv {
@@ -114,19 +120,19 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 input[type="number"] {
-  -moz-appearance: textfield; /* For Firefox */
+  -moz-appearance: textfield;
   appearance: textfield;
 }
 
 .form-row {
   display: flex;
-  justify-content: space-between; /* Distribute space evenly */
-  gap: 20px; /* Add some space between items */
-  margin-bottom: 15px; /* Add spacing below the row */
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 15px;
 }
 
 .form-row > div {
-  flex: 1; /* Each div takes equal width */
+  flex: 1;
 }
 
 .loading-overlay {
@@ -138,17 +144,89 @@ input[type="number"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.5
-  ); /* Optional: semi-transparent background */
-  z-index: 1000; /* Ensure it's on top */
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
 }
 
-/* Optional: Dim the form when loading */
 form.loading {
   opacity: 0.5;
-  pointer-events: none; /* Prevent interaction */
+  pointer-events: none;
+}
+
+.tooltip-red {
+  --balloon-color: rgb(112, 112, 112);
+  --balloon-border-radius: 8px;
+}
+
+.checkbox-wrapper-2 .ikxBAC {
+  appearance: none;
+  background-color: #dfe1e4;
+  border-radius: 72px;
+  border-style: none;
+  flex-shrink: 0;
+  height: 20px;
+  margin: 0;
+  position: relative;
+  width: 30px;
+}
+
+.checkbox-wrapper-2 .ikxBAC::before {
+  bottom: -6px;
+  content: "";
+  left: -6px;
+  position: absolute;
+  right: -6px;
+  top: -6px;
+}
+
+.checkbox-wrapper-2 .ikxBAC,
+.checkbox-wrapper-2 .ikxBAC::after {
+  transition: all 100ms ease-out;
+}
+
+.checkbox-wrapper-2 .ikxBAC::after {
+  background-color: #fff;
+  border-radius: 50%;
+  content: "";
+  height: 14px;
+  left: 3px;
+  position: absolute;
+  top: 3px;
+  width: 14px;
+}
+
+.checkbox-wrapper-2 input[type="checkbox"] {
+  cursor: default;
+}
+
+.checkbox-wrapper-2 .ikxBAC:hover {
+  background-color: #c9cbcd;
+  transition-duration: 0s;
+}
+
+.checkbox-wrapper-2 .ikxBAC:checked {
+  background-color: #1a73e8;
+}
+
+.checkbox-wrapper-2 .ikxBAC:checked::after {
+  background-color: #fff;
+  left: 13px;
+}
+
+.checkbox-wrapper-2 :focus:not(.focus-visible) {
+  outline: 0;
+}
+
+.checkbox-wrapper-2 .ikxBAC:checked:hover {
+  background-color: #1a73e8;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  font-size: small;
+  background-color: #ffffff00; 
+  color: rgb(71, 71, 71); 
+  text-align: center;
+  
 }

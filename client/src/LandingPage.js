@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BeatLoader } from "react-spinners";
 import executeAiModelRequest from "./ApiService";
+import "balloon-css";
 
 function LandingPage() {
   let [loading, setLoading] = useState(false);
@@ -64,7 +65,7 @@ function LandingPage() {
       .filter((paragraph) => paragraph.trim() !== "");
 
     return (
-      <div class="resultDiv">
+      <div className="resultDiv">
         {paragraphs.map((paragraph, index) => {
           const cleanParagraph = paragraph.replace(/\*\*/g, "");
           return <p key={index}>{cleanParagraph}</p>;
@@ -76,7 +77,7 @@ function LandingPage() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h1 class="appTitle">PreDoc</h1>
+        <h1 className="appTitle">PreDoc</h1>
 
         <div className="form-row">
           <div>
@@ -116,7 +117,14 @@ function LandingPage() {
         </div>
 
         <div>
-          <label>Food Intake Score (0-5):</label>
+          <label
+            class="tooltip-red"
+            data-balloon-length="medium"
+            aria-label="0 if you mainly consume processed food and fast food. 5 if you eat healhty on a daily basis."
+            data-balloon-pos="right"
+          >
+            Food Intake Score (0-5):
+          </label>
           <input
             type="range"
             min="0"
@@ -128,7 +136,14 @@ function LandingPage() {
         </div>
 
         <div>
-          <label>Drink Intake Score (0-5):</label>
+          <label
+            class="tooltip-red"
+            data-balloon-length="medium"
+            aria-label="0 if you mainly consume sugary and/or alcoholic drinks. 5 if your main drink of choice is water."
+            data-balloon-pos="right"
+          >
+            Drink Intake Score (0-5):
+          </label>
           <input
             type="range"
             min="0"
@@ -152,11 +167,12 @@ function LandingPage() {
           <span>{waterIntake}&nbsp;ml</span>
         </div>
 
-        <div className="form-row">
+        <div className="form-row checkbox-wrapper-2">
           <div>
             <label>Coffee:</label>
             <input
               type="checkbox"
+              class="sc-gJwTLC ikxBAC"
               checked={coffee}
               onChange={(e) => setCoffee(e.target.checked)}
             />
@@ -166,6 +182,7 @@ function LandingPage() {
             <label>Alcohol:</label>
             <input
               type="checkbox"
+              class="sc-gJwTLC ikxBAC"
               checked={alcohol}
               onChange={(e) => setAlcohol(e.target.checked)}
             />
@@ -175,6 +192,7 @@ function LandingPage() {
             <label>Drugs:</label>
             <input
               type="checkbox"
+              class="sc-gJwTLC ikxBAC"
               checked={drugs}
               onChange={(e) => setDrugs(e.target.checked)}
             />
@@ -184,6 +202,7 @@ function LandingPage() {
             <label>Smoking:</label>
             <input
               type="checkbox"
+              class="sc-gJwTLC ikxBAC"
               checked={smoking}
               onChange={(e) => setSmoking(e.target.checked)}
             />
@@ -200,11 +219,13 @@ function LandingPage() {
             maxLength="350"
           />
         </div>
-        <button class="submitBtn" type="submit">
-          Submit
-        </button>
+        <div className="submitDiv">
+          <button className="submitBtn" type="submit">
+            Submit
+          </button>
+        </div>
         {result && (
-          <div class="resultDiv">
+          <div className="resultDiv">
             <h3>Results:</h3>
             {formatResult(result)}
             <p>

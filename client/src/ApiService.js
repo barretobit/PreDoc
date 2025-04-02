@@ -1,6 +1,6 @@
 import { InferenceClient } from "@huggingface/inference";
 
-const localDebug = true;
+const localDebug = false;
 
 const executeAiModelRequest = async (
   prompt,
@@ -46,7 +46,8 @@ const executeAiModelRequest = async (
     
     Symptoms: ${prompt}
     
-    Based on this information, please provide a brief summary of potential related medical conditions. Remember, this is for informational purposes only and should not be used for medical advice.
+    Based on this information, please provide some of potential related medical conditions. Remember, this is for informational purposes only and should not be used for medical advice. Also provide some Nutrition Suggestions and some Workout Tips. 
+    The result should display 3 sections, the Potential Medical Conditions, the Nutrition Suggestions and the Workout Tips. And each section should contain the information short and simplified, nothing too extended.
     `;
 
     try {
@@ -59,7 +60,7 @@ const executeAiModelRequest = async (
             content: fullPrompt,
           },
         ],
-        max_tokens: 300,
+        max_tokens: 500,
       });
 
       return chatCompletion;
