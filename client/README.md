@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![React Version](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/downloads/)
+[![AI Model](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/downloads/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
