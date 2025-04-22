@@ -1,10 +1,11 @@
 # PreDoc - Simple Symptom Analysis Demo
 
+![Static Badge](https://img.shields.io/badge/Jo%C3%A3o%20Barreto-blue?style=plastic&logo=mediafire&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=plastic&logo=react&logoColor=white)](https://react.dev/)
+[![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react)
 [![Hugging Face Inference API](https://img.shields.io/badge/Hugging%20Face-FFD21F?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/inference-api)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f73826fe-fc37-4f59-9703-c3884ff7f39c/deploy-status)](https://app.netlify.com/sites/predoc/deploys)
-[![Deployed Version](https://predoc.netlify.app/)](predoc.netlify.app)
 
 A demonstration web application built with React.js that utilizes the Hugging Face Inference API to provide a brief summary of potential related medical conditions based on user-inputted information and symptoms.
 
